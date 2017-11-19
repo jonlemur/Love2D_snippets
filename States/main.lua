@@ -4,9 +4,6 @@
 
 state=require("stateswitcher")
 
-function load()
-end
-
 function love.keyreleased(key)
 state.switch("states/state1/state1")
 end

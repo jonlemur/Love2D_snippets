@@ -1,8 +1,6 @@
 --STATE 1
 state=require("stateswitcher")
 
-function load()
-end
 
 function love.keyreleased(key)
 state.switch("main")
