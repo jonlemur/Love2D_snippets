@@ -11,7 +11,10 @@ function textField:new(name, x, y)
 	tF.x=x
 	tF.y=y
 	tF.bg = love.graphics.newImage("img/texField.png")
+	tF.bg:setFilter( "nearest", "nearest", 1 )
 	tF.text= "Text"
+	tF.font = love.graphics.newFont("font/thin_pixel-7.ttf", 25)
+	tF.font:setFilter( "nearest", "nearest", 1 )
 	tF.selected = false
 	return tF
 end
@@ -61,12 +64,16 @@ function textField:clicked(mouseX, mouseY, zoom)
 			self.selected = false
 			print(self.name .. " deselected")
 		end
+	else
+		self.selected = false
+			print(self.name .. " deselected")
 	end
 	
 end
 
 
 function textField:draw()
+	love.graphics.setFont( self.font )
 	love.graphics.draw(self.bg, self.x,self.y)
-	love.graphics.print(self.text, self.x+5,self.y+5)
+	love.graphics.print(self.text, self.x+7,self.y-5)
 end
