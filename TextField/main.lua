@@ -18,11 +18,10 @@ function love.load()
 	sCenterX = sheet:getWidth() / 2
 	sCenterY = sheet:getHeight() / 2
 
-	textField1 = textField:new("Text1",centerX-170,centerY-90, 80, 20, 11)
-	textField2 = textField:new("text2",centerX-170,centerY-60, 120, 20, 30)
+	textField1 = textField:new("",centerX-170,centerY-90, 80, 20, 11)
+	textField2 = textField:new("text",centerX-170,centerY-60, 120, 20, 18)
 
 end
-
 
 function love.mousepressed(x, y, button, istouch)
 	textField1:clicked(x,y, zoom)

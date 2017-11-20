@@ -27,7 +27,9 @@ end
 
 function textField:typing(t)
 	if self.selected then
-		self.text = self.text .. t
+		if string.len(self.text)<self.maxLenght then
+			self.text = self.text .. t
+		end
 	end
 end
 
