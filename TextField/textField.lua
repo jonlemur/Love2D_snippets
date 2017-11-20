@@ -3,6 +3,7 @@ textField.__index = textField
 
 local utf8 = require("utf8")
 
+-- Constructor 
 function textField:new(name, x, y)
 	local tF = {}
 	setmetatable(tF, textField)
@@ -15,7 +16,7 @@ function textField:new(name, x, y)
 	return tF
 end
 
---Use this for resize events
+--Use this for resize events, to position textfield dynamically
 function textField:reposition(x,y)
 	self.x = x
 	self.y = y
@@ -34,6 +35,8 @@ function textField:deleting()
             self.text = string.sub(self.text, 1, byteoffset - 1)
         end
 end
+
+
 
 function textField:clicked(mouseX, mouseY, zoom)
 	--width and height of the textfield
@@ -60,4 +63,10 @@ function textField:clicked(mouseX, mouseY, zoom)
 		end
 	end
 	
+end
+
+
+function textField:draw()
+	love.graphics.draw(self.bg, self.x,self.y)
+	love.graphics.print(self.text, self.x+5,self.y+5)
 end
