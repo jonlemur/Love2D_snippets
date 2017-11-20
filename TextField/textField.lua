@@ -3,16 +3,16 @@ textField.__index = textField
 
 local utf8 = require("utf8")
 
--- Constructor 
-function textField:new(name, x, y)
+-- Constructor
+function textField:new(text, x, y, width, height, maxLenght)
 	local tF = {}
 	setmetatable(tF, textField)
-	tF.name = name
 	tF.x=x
 	tF.y=y
-	tF.bg = love.graphics.newImage("img/texField.png")
-	tF.bg:setFilter( "nearest", "nearest", 1 )
-	tF.text= "Text"
+	tF.width = width
+	tF.height = height
+	tF.text= text
+	tF.maxLenght = maxLenght
 	tF.font = love.graphics.newFont("font/thin_pixel-7.ttf", 25)
 	tF.font:setFilter( "nearest", "nearest", 1 )
 	tF.selected = false
@@ -27,24 +27,23 @@ end
 
 function textField:typing(t)
 	if self.selected then
-	self.text = self.text .. t
+		self.text = self.text .. t
 	end
 end
 
 function textField:deleting()
         local byteoffset = utf8.offset(self.text, -1)
- 
+
         if byteoffset and self.selected then
             self.text = string.sub(self.text, 1, byteoffset - 1)
         end
 end
 
 
-
 function textField:clicked(mouseX, mouseY, zoom)
 	--width and height of the textfield
-	local rBound = 80
-	local lBound = 20
+	local rBound = self.width
+	local lBound = self.height
 	rBound = rBound + self.x
 	lBound = lBound + self.y
 
@@ -52,28 +51,36 @@ function textField:clicked(mouseX, mouseY, zoom)
 	btnX = btnX * zoom
 	local btnY = self.y
 	btnY = btnY * zoom
-	
+
 	rBound = rBound * zoom
 	lBound = lBound * zoom
-	
+
 	if mouseX> btnX and mouseX<rBound then
 		if mouseY> btnY and mouseY<lBound then
 			self.selected = true
-			print(self.name .. " selected")	
 		else
 			self.selected = false
-			print(self.name .. " deselected")
 		end
 	else
 		self.selected = false
-			print(self.name .. " deselected")
 	end
-	
-end
 
+end
 
 function textField:draw()
 	love.graphics.setFont( self.font )
-	love.graphics.draw(self.bg, self.x,self.y)
+	--love.graphics.draw(self.bg, self.x,self.y)
+	if self.selected then
+		love.graphics.setColor(70, 70, 70)
+	else
+		love.graphics.setColor(30, 30, 30)
+	end
+	love.graphics.rectangle("fill", self.x, self.y, self.width, self.height )
+	love.graphics.setColor(255, 255, 255, 255)
+
 	love.graphics.print(self.text, self.x+7,self.y-5)
 end
+
+
+
+
