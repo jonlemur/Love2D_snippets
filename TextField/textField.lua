@@ -3,27 +3,18 @@ textField.__index = textField
 
 local utf8 = require("utf8")
 
-<<<<<<< HEAD
-function textField:new(name, x, y, width, height)
-=======
 -- Constructor
 function textField:new(text, x, y, width, height, maxLenght)
->>>>>>> 20ca52f3b777b95b9210ed6f5d9965c78792f652
 	local tF = {}
 	setmetatable(tF, textField)
 	tF.x=x
 	tF.y=y
 	tF.width = width
 	tF.height = height
-<<<<<<< HEAD
-	tF.bg = love.graphics.newImage("img/texField.png")
-	tF.text= "Text"
-=======
 	tF.text= text
 	tF.maxLenght = maxLenght
 	tF.font = love.graphics.newFont("font/thin_pixel-7.ttf", 25)
 	tF.font:setFilter( "nearest", "nearest", 1 )
->>>>>>> 20ca52f3b777b95b9210ed6f5d9965c78792f652
 	tF.selected = false
 	return tF
 end
@@ -69,10 +60,6 @@ function textField:clicked(mouseX, mouseY, zoom)
 	if mouseX> btnX and mouseX<rBound then
 		if mouseY> btnY and mouseY<lBound then
 			self.selected = true
-<<<<<<< HEAD
-			print(self.name .. " selected")
-=======
->>>>>>> 20ca52f3b777b95b9210ed6f5d9965c78792f652
 		else
 			self.selected = false
 		end
@@ -82,25 +69,19 @@ function textField:clicked(mouseX, mouseY, zoom)
 
 end
 
+
 function textField:draw()
 	love.graphics.setFont( self.font )
-	--love.graphics.draw(self.bg, self.x,self.y)
+	
 	if self.selected then
 		love.graphics.setColor(70, 70, 70)
 	else
 		love.graphics.setColor(30, 30, 30)
 	end
-<<<<<<< HEAD
 
-end
-=======
 	love.graphics.rectangle("fill", self.x, self.y, self.width, self.height )
 	love.graphics.setColor(255, 255, 255, 255)
 
 	love.graphics.print(self.text, self.x+7,self.y-5)
 end
 
-
-
-
->>>>>>> 20ca52f3b777b95b9210ed6f5d9965c78792f652
