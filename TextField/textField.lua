@@ -4,6 +4,7 @@ textField.__index = textField
 local utf8 = require("utf8")
 
 function textField:new(name, x, y)
+function textField:new(name, x, y, width, height)
 	local tF = {}
 	setmetatable(tF, textField)
 	tF.name = name
