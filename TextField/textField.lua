@@ -3,13 +3,14 @@ textField.__index = textField
 
 local utf8 = require("utf8")
 
-function textField:new(name, x, y)
 function textField:new(name, x, y, width, height)
 	local tF = {}
 	setmetatable(tF, textField)
 	tF.name = name
 	tF.x=x
 	tF.y=y
+	tF.width = width
+	tF.height = height
 	tF.bg = love.graphics.newImage("img/texField.png")
 	tF.text= "Text"
 	tF.selected = false
@@ -30,7 +31,7 @@ end
 
 function textField:deleting()
         local byteoffset = utf8.offset(self.text, -1)
- 
+
         if byteoffset and self.selected then
             self.text = string.sub(self.text, 1, byteoffset - 1)
         end
@@ -47,18 +48,18 @@ function textField:clicked(mouseX, mouseY, zoom)
 	btnX = btnX * zoom
 	local btnY = self.y
 	btnY = btnY * zoom
-	
+
 	rBound = rBound * zoom
 	lBound = lBound * zoom
-	
+
 	if mouseX> btnX and mouseX<rBound then
 		if mouseY> btnY and mouseY<lBound then
 			self.selected = true
-			print(self.name .. " selected")	
+			print(self.name .. " selected")
 		else
 			self.selected = false
 			print(self.name .. " deselected")
 		end
 	end
-	
+
 end
